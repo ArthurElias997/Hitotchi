@@ -10,4 +10,5 @@ class TestWater(unittest.TestCase):
         self.assertEqual(curr, 200)
 
     def test_negative_water(self):
-        with self.assertRaises(ValueError): add_water(-50)
+        with self.assertRaises(ValueError):
+            add_water(-50)
