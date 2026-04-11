@@ -1,5 +1,5 @@
 import unittest
-from src.water import set_goal, add_water, get_progress, reset_water
+from src.water import add_water, get_progress, reset_water
 
 class TestWater(unittest.TestCase):
     def setUp(self): reset_water()
