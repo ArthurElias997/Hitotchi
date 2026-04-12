@@ -68,7 +68,7 @@ class HitochiApp:
         self.char_image_lbl.pack(side=tk.BOTTOM, anchor=tk.SE, pady=(10, 0))
 
         self.speech_bubble = tk.Label(right_frame, text="", font=("Arial", 11, "italic"), 
-                                      bg="#f0f0f0", relief="solid", borderwidth=1, padx=10, pady=10, wraplength=250)
+                                      bg="#5706ed", relief="solid", borderwidth=1, padx=10, pady=10, wraplength=250)
         self.speech_bubble.pack(side=tk.BOTTOM, anchor=tk.SE, pady=(0, 10))
 
     def update_display(self, action="idle"):
@@ -94,7 +94,12 @@ class HitochiApp:
             # Carrega a imagem só se ela existir
             if os.path.exists(img_path):
                 if img_path not in self.photo_images:
-                    self.photo_images[img_path] = tk.PhotoImage(file=img_path)
+                    # 1. Carrega a imagem original grandona
+                    img_original = tk.PhotoImage(file=img_path)
+                    # 2. Encolhe ela (Aqui estou usando 4, mas você pode mudar para 6, 8, etc.)
+                    self.photo_images[img_path] = img_original.subsample(8, 8)
+                
+                # 3. Coloca a imagem reduzida na tela
                 self.char_image_lbl.config(image=self.photo_images[img_path], text="")
             else:
                 self.char_image_lbl.config(image='', text=f"[Imagem {self.current_char} não encontrada]", fg="red")
