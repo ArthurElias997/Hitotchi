@@ -182,7 +182,7 @@ class HitochiApp:
                     return dados['fact'] # Pega só o texto da curiosidade
                 else:
                     return "Sabia que beber água melhora o foco e a energia?"
-            except:
+            except (requests.RequestException, ValueError):
                 # Se o usuário estiver sem internet, o app não trava
                 return "Sabia que beber água melhora o foco e a energia?"
 
