@@ -4,6 +4,7 @@ from tkinter import messagebox
 import os
 import todo
 import water
+import requests
 from characters import CHARACTERS, get_character_message
 
 class HitochiApp:
@@ -86,6 +87,12 @@ class HitochiApp:
 
         # Atualiza a fala do personagem
         msg = get_character_message(self.current_char, action)
+        # === ENTRADA DA API ===
+        # Se for o Feretchi e a ação for registrar água, busca o fato na internet
+        if self.current_char == "Feretchi" and action == "water":
+            fato_externo = self.buscar_fato_animal()
+            msg = f"{msg}\n\n💡 Curiosidade do Feretchi: {fato_externo}"
+        # ======================
         self.speech_bubble.config(text=f"{self.current_char} diz:\n\"{msg}\"")
 
         # Atualiza a imagem do personagem (Lida com o PNG)
@@ -163,6 +170,21 @@ class HitochiApp:
     def change_character(self, new_char):
         self.current_char = new_char
         self.update_display("idle")
+
+    def buscar_fato_animal(self):
+            try:
+                # Faz o pedido para a internet
+                resposta = requests.get("https://catfact.ninja/fact", timeout=5)
+
+                # Se a internet e a API estiverem ok (código 200)
+                if resposta.status_code == 200:
+                    dados = resposta.json()
+                    return dados['fact'] # Pega só o texto da curiosidade
+                else:
+                    return "Sabia que beber água melhora o foco e a energia?"
+            except:
+                # Se o usuário estiver sem internet, o app não trava
+                return "Sabia que beber água melhora o foco e a energia?"
 
 if __name__ == "__main__":
     root = tk.Tk()

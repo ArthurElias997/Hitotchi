@@ -2,7 +2,7 @@
 
 CHARACTERS = {
     "Kukorou": {
-        "image": "assets/kukorou.png",
+        "image": "../assets/kukorou.png",
         "messages": {
             "idle": "Estou aqui! Squeak! Precisa de algo?",
             "water": "Ufa! Você bebeu água. Eu estava muito preocupado!",
@@ -11,7 +11,7 @@ CHARACTERS = {
         }
     },
     "Feretchi": {
-        "image": "assets/feretchi.png",
+        "image": "../assets/feretchi.png",
         "messages": {
             "idle": "Vamos brincar! O que tem para fazer hoje?",
             "water": "Glub glub! Água te dá mais energia para pular!",
@@ -20,7 +20,7 @@ CHARACTERS = {
         }
     },
     "Kumafu": {
-        "image": "assets/kumafu.png",
+        "image": "../assets/kumafu.png",
         "messages": {
             "idle": "*Bocejo*... estou aqui. Mas não toque no meu mel.",
             "water": "Água é aceitável. Continue bebendo.",
