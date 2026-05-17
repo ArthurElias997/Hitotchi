@@ -51,36 +51,79 @@ O nome vem do japonês: **hito** (pessoa) + **chi** (vigia) – um “vigia de p
 ### 🐾 Personagens motivacionais
 Três personagens interativos que incentivam o usuário:
 
-| Personagem | Personalidade | Exemplo de mensagem |
-|------------|---------------|----------------------|
-| **Kukorou** | Ansioso, preocupado, carinhoso | “Ufa! Você bebeu água. Eu estava muito preocupado!” |
-| **Feretchi** | Energético, infantil, brincalhão | “Glub glub! Água te dá mais energia para pular!” |
-| **Kumafu** | Calma, preguiçosa, possessiva | “Água é aceitável. Continue bebendo.” |
+| Personagem | Personalidade |
+|------------|---------------|
+| **Kukorou** | Ansioso, preocupado, carinhoso |
+| **Feretchi** | Energético, infantil, brincalhão |
+| **Kumafu** | Calma, preguiçosa, possessiva |
 
-As mensagens mudam conforme a ação: `idle`, `water`, `task_done` ou `goal_reached`.
+As interações mudam conforme a ação: `idle`, `water`, `task_done` ou `goal_reached`.
 
 ## Tecnologias utilizadas
 
 - **Python 3.13**
 - **Tkinter** – Interface gráfica (biblioteca padrão)
+- **requests** – Consumo de API HTTP
 - **unittest** – Testes automatizados
 - **Ruff** – Linting e análise estática
 - **GitHub Actions** – Integração contínua (CI)
 - **Git** – Controle de versão
 
-## Instruções de Execução
+---
 
-# 1. Clone o repositório
-git clone https://github.com/ArthurElias997/Hitotchi.git
+## Integração com API Pública Aberta
+O projeto consome a API pública Cat Facts (https://catfact.ninja/fact) de forma totalmente assíncrona e segura.
+
+**Funcionamento:** Sempre que o usuário registra uma nova ingestão de água, o sistema faz uma requisição HTTP GET para buscar uma curiosidade aleatória sobre felinos.
+
+**Tratamento de Falhas:** O código possui tratamento robusto contra quedas de conexão ou indisponibilidade do servidor (bloco try/except), garantindo que o app nunca trave e exiba uma mensagem amigável de contingência caso o usuário esteja offline.
+
+---
+
+## Testes Automatizados
+O projeto possui uma suíte de testes unitários e de integração localizada na pasta /tests.
+
+**Para rodar especificamente o Teste de Integração da API, garanta que seu terminal esteja na pasta raiz do projeto (Hitotchi) e execute:**
+
+python3 -m unittest tests/test_api.py
+
+**Para rodar toda a suíte de testes da aplicação:**
+
+python3 -m unittest discover -s tests
+
+---
+
+## Fluxo de Trabalho (Git / GitHub)
+O desenvolvimento desta etapa seguiu estritamente as boas práticas de engenharia de software do BootCamp:
+
+**Branch Dedicada:** Toda a evolução (integração da API e testes) foi codificada na branch regulamentar entrega-intermediaria.
+
+**Rastreabilidade:** O progresso e a resolução do problema foram diretamente atrelados à respectiva Issue aberta no repositório.
+
+**CI/CD:** Integração contínua ativa via GitHub Actions garantindo a validação estática e execução automática de testes a cada push.
+
+---
+
+## 🛠️ Instruções de Instalação e Execução (Deploy Desktop)
+
+Como o **Hitochi** é uma aplicação Desktop com Interface Gráfica (GUI) baseada em Tkinter, a publicação e execução ocorrem diretamente em ambiente local. Siga os passos abaixo:
+
+**1. Clone o repositório**
+
+git clone [https://github.com/ArthurElias997/Hitotchi.git](https://github.com/ArthurElias997/Hitotchi.git)
 cd Hitotchi
 
-# 2. (Opcional) Crie um ambiente virtual
-python -m venv venv
+**2. (Opcional) Crie um ambiente virtual**
+
+python3 -m venv venv
 source venv/bin/activate      # Linux/Mac
 venv\Scripts\activate         # Windows
 
-# 3. Instale as dependências (apenas ruff para lint, não necessário para execução)
-pip install -r requirements.txt
+**3. Instale as dependências**
 
-# 4. Execute a aplicação
-python src/main.py
+pip install requests
+
+**4. Execute o aplicativo**
+
+cd src
+python3 main.py
